@@ -10,6 +10,9 @@ var options = new OpenAIClientOptions()
 IChatClient chatClient = new OpenAIClient(new ApiKeyCredential("ollama"), options).GetChatClient("llama3.1:8b").AsIChatClient();
 
 
-ChatResponse response = await chatClient.GetResponseAsync("What is AI ? explain max 20 words");
+string prompt = "What is AI ? explain max 20 words";
+Console.WriteLine($"User: {prompt}");
+ChatResponse response = await chatClient.GetResponseAsync(prompt);
 
-Console.WriteLine(response);
+Console.WriteLine($"Assistant: {response}");
+Console.WriteLine($"Tokens used in={response.Usage?.InputTokenCount}, out={response.Usage?.OutputTokenCount}");
